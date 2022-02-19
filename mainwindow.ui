@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -32,6 +35,12 @@
    <string>Отзыв о посещении сервиса</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QFrame
+{
+background-color: #ffffff;
+}</string>
+   </property>
    <widget class="QPushButton" name="ButtonClose">
     <property name="geometry">
      <rect>
@@ -46,6 +55,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="ButtonNext">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>698</x>
@@ -658,6 +670,9 @@
     </property>
    </widget>
    <widget class="QFrame" name="Page_1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -667,16 +682,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QFrame
-{
-background-color: #ffffff;
-}</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+     <string notr="true"/>
     </property>
     <widget class="QSlider" name="RatingSlider">
      <property name="geometry">
@@ -710,6 +716,9 @@ background-color: #ffffff;
      </property>
     </widget>
     <widget class="QLabel" name="Question_1">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>170</x>
@@ -746,6 +755,28 @@ background-color: #ffffff;
       <bool>true</bool>
      </property>
     </widget>
+   </widget>
+   <widget class="QFrame" name="Page_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <property name="visible">
+     <bool>false</bool>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
    </widget>
   </widget>
  </widget>
