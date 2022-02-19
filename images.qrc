@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>src/icons/emoji_angry.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+	    <file>src/icons/emoji_sad.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>src/icons/emoji_neutral.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>src/icons/emoji_slightly_smile.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>src/icons/emoji_smile.png</file>
+    </qresource>
+</RCC>
