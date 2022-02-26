@@ -6,21 +6,38 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //MainWindow::Windows.append(ui->Page_1);
+    MainWindow::Windows.push_back(ui->Page_1);
 
+    QPushButton * button = new QPushButton("Press");
+    QSlider * slider = new QSlider(Qt::Horizontal);
 
-    for (auto & page : MainWindow::Pages) {
-        QLayout * Page = new QVBoxLayout();
+    slider->setFixedWidth(200);
+
+    MainWindow::Actions.push_back(button);
+    MainWindow::Actions.push_back(slider);
+
+    for (int i = 0; i < MainWindow::Questions.length(); i++) {
+        QString question = MainWindow::Questions[i];
+        QWidget * Action = MainWindow::Actions[i];
+
+        QFrame * Page = new QFrame();
+        QLayout * Layout = new QVBoxLayout();
         QLabel * Question = new QLabel();
 
-        Page->addWidget(Question);
-//        Question->setGeometry(170, 90, 460, 150);
-//        Page->setStyleSheet("QLabel {}")
-        Question->setText(page);
 
         Page->setGeometry(QRect(0, 0, 800, 530));
 
-        MainWindow::Windows.append(Page);
+
+        Question->setText(question);
+        Question->setFont(QFont("ubuntu", 16));
+        Question->setContentsMargins(0, 0, 0, 100);
+
+
+        Layout->addWidget(Question);
+        Layout->addWidget(Action);
+        Layout->setAlignment(Qt::AlignCenter);
+        Page->setLayout(Layout);
+        MainWindow::Windows.push_back(Page);
 
     }
 }
@@ -68,6 +85,6 @@ void MainWindow::on_ButtonNext_clicked()
     MainWindow::Windows[CurrentStage]->setParent(nullptr);
     MainWindow::CurrentStage++;
     ui->progressBar->setValue((int)(100*(MainWindow::CurrentStage+1)/MainWindow::Windows.size()));
-    ui->verticalLayout->addWidget(MainWindow::Windows[CurrentStage]->widget(), Qt::AlignCenter);
+    ui->verticalLayout->addWidget(MainWindow::Windows[CurrentStage], Qt::AlignCenter);
 }
 

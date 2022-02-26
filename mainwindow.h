@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFrame>
+#include <QCheckBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,8 +19,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QVector<QLayout *> Windows;
-    QVector<QString> Pages = {"Че как?"};
+    QVector<QFrame *> Windows;
+    QVector<QString> Questions = {"Че как?", "Понравился сервис?"};
+    QVector<QWidget *> Actions;
     int CurrentStage = 0;
 
 
