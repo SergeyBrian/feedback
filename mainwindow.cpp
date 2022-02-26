@@ -6,13 +6,23 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    MainWindow::Windows.append(ui->Page_1);
-    MainWindow::Windows.append(ui->Page_2);
-//    MainWindow::Windows.append(ui->Page_3);
-//    MainWindow::Windows.append(ui->Page_1);
-//    MainWindow::Windows.append(ui->Page_1);
-//    MainWindow::Windows.append(ui->Page_1);
-//    MainWindow::Windows.append(ui->Page_1);
+    //MainWindow::Windows.append(ui->Page_1);
+
+
+    for (auto & page : MainWindow::Pages) {
+        QLayout * Page = new QVBoxLayout();
+        QLabel * Question = new QLabel();
+
+        Page->addWidget(Question);
+//        Question->setGeometry(170, 90, 460, 150);
+//        Page->setStyleSheet("QLabel {}")
+        Question->setText(page);
+
+        Page->setGeometry(QRect(0, 0, 800, 530));
+
+        MainWindow::Windows.append(Page);
+
+    }
 }
 
 MainWindow::~MainWindow()
@@ -52,11 +62,12 @@ void MainWindow::on_ButtonNext_clicked()
         ui->ButtonNext->setText("Отправить");
     }
     if (MainWindow::CurrentStage + 1 == MainWindow::Windows.size()) {
-        this->close();
+        QApplication::closeAllWindows();
+        return;
     }
-    MainWindow::Windows[CurrentStage]->setVisible(false);
+    MainWindow::Windows[CurrentStage]->setParent(nullptr);
     MainWindow::CurrentStage++;
     ui->progressBar->setValue((int)(100*(MainWindow::CurrentStage+1)/MainWindow::Windows.size()));
-    MainWindow::Windows[CurrentStage]->setVisible(true);
+    ui->verticalLayout->addWidget(MainWindow::Windows[CurrentStage]->widget(), Qt::AlignCenter);
 }
 

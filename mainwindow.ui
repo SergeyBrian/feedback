@@ -677,8 +677,8 @@ background-color: #ffffff;
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>801</width>
-      <height>531</height>
+      <width>800</width>
+      <height>530</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -756,28 +756,22 @@ background-color: #ffffff;
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="Page_2">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>801</width>
-      <height>531</height>
+      <width>800</width>
+      <height>530</height>
      </rect>
     </property>
-    <property name="visible">
-     <bool>false</bool>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
    </widget>
+   <zorder>ButtonClose</zorder>
+   <zorder>ButtonNext</zorder>
+   <zorder>progressBar</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>Page_1</zorder>
   </widget>
  </widget>
  <resources>

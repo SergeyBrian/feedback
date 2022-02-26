@@ -18,7 +18,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QVector<QFrame *> Windows;
+    QVector<QLayout *> Windows;
+    QVector<QString> Pages = {"Че как?"};
     int CurrentStage = 0;
 
 
