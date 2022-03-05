@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include <QRadioButton>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,23 +10,35 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     MainWindow::Windows.push_back(ui->Page_1);
 
-    QPushButton * button = new QPushButton("Press");
-    QSlider * slider = new QSlider(Qt::Horizontal);
+//    QSlider * slider = new QSlider(Qt::Horizontal);
 
-    slider->setFixedWidth(200);
+//    slider->setFixedWidth(200);
 
-    MainWindow::Actions.push_back(button);
-    MainWindow::Actions.push_back(slider);
+//    MainWindow::Actions.push_back(button);
+
 
     for (int i = 0; i < MainWindow::Questions.length(); i++) {
         QString question = MainWindow::Questions[i];
-        QWidget * Action = MainWindow::Actions[i];
 
         QFrame * Page = new QFrame();
         QLayout * Layout = new QVBoxLayout();
         QLabel * Question = new QLabel();
+        QWidget * buttons_container = new QWidget();
+        QHBoxLayout * buttons = new QHBoxLayout();
+        QRadioButton * button_yes = new QRadioButton("Да");
+        QRadioButton * button_no = new QRadioButton("Нет");
+        buttons->addWidget(button_yes);
+        buttons->addWidget(button_no);
 
+        connect(button_yes, SIGNAL(clicked()), this, SLOT(on_RadioButton_Change()));
+        connect(button_no, SIGNAL(clicked()), this, SLOT(on_RadioButton_Change()));
 
+//        button_yes->setCheckable(true);
+//        button_no->setCheckable(false);
+
+        buttons->setAlignment(Qt::AlignCenter);
+        buttons_container->setLayout(buttons);
+//        buttons_container->setMaximumWidth(200);
         Page->setGeometry(QRect(0, 0, 800, 530));
 
 
@@ -34,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
         Layout->addWidget(Question);
-        Layout->addWidget(Action);
+        Layout->addWidget(buttons_container);
         Layout->setAlignment(Qt::AlignCenter);
         Page->setLayout(Layout);
         MainWindow::Windows.push_back(Page);
@@ -86,5 +100,11 @@ void MainWindow::on_ButtonNext_clicked()
     MainWindow::CurrentStage++;
     ui->progressBar->setValue((int)(100*(MainWindow::CurrentStage+1)/MainWindow::Windows.size()));
     ui->verticalLayout->addWidget(MainWindow::Windows[CurrentStage], Qt::AlignCenter);
+    ui->ButtonNext->setEnabled(false);
+}
+
+
+void MainWindow::on_RadioButton_Change() {
+    ui->ButtonNext->setEnabled(true);
 }
 

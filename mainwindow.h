@@ -20,7 +20,10 @@ public:
 private:
     Ui::MainWindow *ui;
     QVector<QFrame *> Windows;
-    QVector<QString> Questions = {"Че как?", "Понравился сервис?"};
+    QVector<QString> Questions = {"Будете ли вы рекомендовать сервис друзьям?",
+                                  "Были ли вы удовлетворены работой наших сотрудников?",
+                                  "Наш сервис помог вам решить вашу проблему?",
+                                  "Остались ли вы довольны нашей службой доставки?"};
     QVector<QWidget *> Actions;
     int CurrentStage = 0;
 
@@ -29,5 +32,6 @@ private slots:
     void on_RatingSlider_valueChanged(int value);
     void on_ButtonClose_clicked();
     void on_ButtonNext_clicked();
+    void on_RadioButton_Change();
 };
 #endif // MAINWINDOW_H
