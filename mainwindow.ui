@@ -187,6 +187,20 @@ background-color: #ffffff;
      <string>Далее</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="ButtonSkip">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>544</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Пропустить</string>
+    </property>
+   </widget>
+   <zorder>ButtonSkip</zorder>
    <zorder>ButtonClose</zorder>
    <zorder>progressBar</zorder>
    <zorder>verticalLayoutWidget</zorder>

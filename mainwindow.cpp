@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include <QRadioButton>
+#include <QTextEdit>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,26 +20,30 @@ MainWindow::MainWindow(QWidget *parent)
 
     for (int i = 0; i < MainWindow::Questions.length(); i++) {
         QString question = MainWindow::Questions[i];
+        bool bLast = i == Questions.length() - 1;
 
         QFrame * Page = new QFrame();
         QLayout * Layout = new QVBoxLayout();
         QLabel * Question = new QLabel();
         QWidget * buttons_container = new QWidget();
         QHBoxLayout * buttons = new QHBoxLayout();
-        QRadioButton * button_yes = new QRadioButton("Да");
-        QRadioButton * button_no = new QRadioButton("Нет");
-        buttons->addWidget(button_yes);
-        buttons->addWidget(button_no);
+        if (!bLast) {
+            QRadioButton * button_yes = new QRadioButton("Да");
+            QRadioButton * button_no = new QRadioButton("Нет");
 
-        connect(button_yes, SIGNAL(clicked()), this, SLOT(on_RadioButton_Change()));
-        connect(button_no, SIGNAL(clicked()), this, SLOT(on_RadioButton_Change()));
+            buttons->addWidget(button_yes);
+            buttons->addWidget(button_no);
 
-//        button_yes->setCheckable(true);
-//        button_no->setCheckable(false);
+            connect(button_yes, SIGNAL(clicked()), this, SLOT(on_RadioButton_Change()));
+            connect(button_no, SIGNAL(clicked()), this, SLOT(on_RadioButton_Change()));
+        } else {
+            QTextEdit * text_edit = new QTextEdit;
+            buttons->addWidget(text_edit);
+            text_edit->setPlaceholderText("Ваш отзыв...");
+        }
 
         buttons->setAlignment(Qt::AlignCenter);
         buttons_container->setLayout(buttons);
-//        buttons_container->setMaximumWidth(200);
         Page->setGeometry(QRect(0, 0, 800, 530));
 
 
@@ -91,6 +96,9 @@ void MainWindow::on_ButtonNext_clicked()
 {
     if (MainWindow::CurrentStage + 2 == MainWindow::Windows.size()) {
         ui->ButtonNext->setText("Отправить");
+        ui->progressBar->hide();
+    } else {
+        ui->ButtonNext->setEnabled(false);
     }
     if (MainWindow::CurrentStage + 1 == MainWindow::Windows.size()) {
         QApplication::closeAllWindows();
@@ -100,11 +108,16 @@ void MainWindow::on_ButtonNext_clicked()
     MainWindow::CurrentStage++;
     ui->progressBar->setValue((int)(100*(MainWindow::CurrentStage+1)/MainWindow::Windows.size()));
     ui->verticalLayout->addWidget(MainWindow::Windows[CurrentStage], Qt::AlignCenter);
-    ui->ButtonNext->setEnabled(false);
 }
 
 
 void MainWindow::on_RadioButton_Change() {
     ui->ButtonNext->setEnabled(true);
+}
+
+
+void MainWindow::on_ButtonSkip_clicked()
+{
+   this->close();
 }
 
